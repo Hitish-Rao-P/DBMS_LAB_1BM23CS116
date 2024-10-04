@@ -93,3 +93,22 @@ VALUES ("A01", "KA052250", 11, 10000),
 ("A03", "KA095477", 13, 25000),
 ("A04", "KA031181", 14, 3000),
 ("A05", "KA041702", 15, 5000);
+
+ UPDATE participated 
+ SET damage_amount=25000 
+ WHERE reg_num='KA053408' AND report_num=12;
+ 
+ SELECT * FROM participated;
+ 
+INSERT INTO accident VALUES(16,'2015-03-08','Domlur');
+
+SELECT * FROM accident;
+ 
+SELECT accident_date, location 
+FROM accident;
+
+SELECT driver_id
+FROM participated
+WHERE damage_amount >=25000;
+
+
