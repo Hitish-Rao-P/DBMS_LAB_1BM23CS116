@@ -1,0 +1,95 @@
+SHOW databases;
+CREATE DATABASE insurance_1BM23CS116;
+USE insurance_1BM23CS116;
+
+CREATE TABLE person(
+driver_id varchar(10),
+name varchar(20),
+address varchar(30),
+PRIMARY KEY(driver_id)
+);
+
+DESC person; 
+
+CREATE TABLE car(
+reg_num varchar(10),
+model varchar(10),
+year int,
+PRIMARY KEY(reg_num)
+);
+
+DESC car;
+
+CREATE TABLE accident(
+report_num int,
+accident_date date,
+location varchar(20),
+PRIMARY KEY(report_num)
+);
+
+DESC accident;
+
+CREATE TABLE owns(
+driver_id varchar(10),
+reg_num varchar(10),
+PRIMARY KEY(driver_id,reg_num),
+FOREIGN KEY(driver_id) REFERENCES person(driver_id),
+FOREIGN KEY(reg_num) REFERENCES car(reg_num)
+);
+
+DESC owns;
+
+CREATE TABLE participated(
+	driver_id varchar(10),
+    reg_num varchar(10),
+    report_num int,
+    damage_amount int,
+    PRIMARY KEY(driver_id,reg_num,report_num),
+    FOREIGN KEY(driver_id) REFERENCES person(driver_id),
+    FOREIGN KEY(reg_num) REFERENCES car(reg_num),
+    FOREIGN KEY(report_num) REFERENCES accident(report_num)
+);
+
+
+DESC participated;
+
+INSERT INTO car
+VALUES ("KA052250", "Indica", 1990), 
+("KA031181", "Lancer", 1957), 
+("KA095477", "Toyota", 1998), 
+("KA053408", "Honda", 2008),
+("KA041702", "Audi", 2005);
+
+SELECT * FROM car;
+
+INSERT INTO person
+VALUES ("A01", "Richard", "Srinivas nagar"),
+("A02", "Pradeep", "Rajaji nagar"),
+("A03", "Smith", "Ashok nagar"),
+("A04", "Venu", "N R Colony"),
+("A05", "Jhon", "Hanumanth nagar");
+
+SELECT * FROM person;
+
+INSERT INTO owns
+VALUES ("A01", "KA052250"),
+("A02", "KA053408"),
+("A03", "KA031181"),
+("A04", "KA095477"),
+("A05", "KA041702");
+
+SELECT * FROM person;
+
+INSERT INTO accident
+VALUES (11, "2001-01-03", "Mysore Road"),
+(12, "2002-02-04", "South end Circle"),
+(13, "2021-02-03", "Bull temple Road"),
+(14, "2017-02-08", "Mysore Road"),
+(15, "2004-03-05", "Kanakpura Road");
+
+INSERT INTO participated
+VALUES ("A01", "KA052250", 11, 10000),
+("A02", "KA053408", 12, 50000),
+("A03", "KA095477", 13, 25000),
+("A04", "KA031181", 14, 3000),
+("A05", "KA041702", 15, 5000);
